@@ -1,0 +1,83 @@
+﻿What do you remember about  *?//Knowledge//1
+How would you define  *?//Knowledge//1
+How would you identify  *?//Knowledge//1
+How would you recognize  *?//Knowledge//1
+What would you choose  *?//Knowledge//1
+Describe what happens when  *?//Knowledge//1
+How is (are)  *?//Knowledge//1
+Where is (are)  *?//Knowledge//1
+Which one  *?//Knowledge//1
+Who was  *?//Knowledge//1
+Why did  *?//Knowledge//1
+What is (are)  *?//Knowledge//1
+When did  *?//Knowledge//1
+How would you outline  *?//Knowledge//1
+List the * in order.//Knowledge
+How would you compare * with **?//Comprehension//2
+How would you contrast * with **?//Comprehension//2
+How would you clarify the meaning of *?//Comprehension//2
+How would you differentiate between * and **?//Comprehension//2
+How would you generalize *?//Comprehension//2
+How would you express *?//Comprehension//2
+What can you infer from *?//Comprehension//2
+What did you observe *?//Comprehension//2
+How would you identify *?//Comprehension//2
+How can you describe *?//Comprehension//2
+Will you restate *?//Comprehension//2
+Elaborate on *.//Comprehension//2
+What would happen if *?//Comprehension//2
+What is the main idea of *?//Comprehension//2
+What can you say about *?//Comprehension//2
+What actions would you take to perform *?//Application//3
+How would you develop _____________ to present *?//Application//3
+What other way would you choose to *?//Application//3
+What would the result be if *?//Application//3
+How would you demonstrate *?//Application//3
+How would you present *?//Application//3
+How would you change *?//Application//3
+How would you modify *?//Application//3
+How could you develop *?//Application//3
+Why does * work?//Application//3
+How would you alter * to **?//Application//3
+What examples can you find that *?//Application//3
+How would you solve *?//Application//3
+How can you classify * according to *?//Analysis//4
+How can you compare the different parts *?//Analysis//4
+What explanation do you have for *?//Analysis//4
+How is * connected to **?//Analysis//4
+Discuss the pros and cons of *.//Analysis//4
+How can you sort the parts *?//Analysis//4
+What is the Analysis//4 of *?//Analysis//4
+What can you infer *?//Analysis//4
+What ideas validate *?//Analysis//4
+How would you explain *?//Analysis//4
+What can you point out about *?//Analysis//4
+What is the problem with *?//Analysis//4
+Why do you think *?//Analysis//4
+What criteria would you use to assess *?//Evaluation//5
+What data was used to evaluate *?//Evaluation//5
+What choice would you have made *?//Evaluation//5
+How would you determine the facts *?//Evaluation//5
+What is the most important *?//Evaluation//5
+What would you suggest *?//Evaluation//5
+How would you grade *?//Evaluation//5
+What is your opinion of *?//Evaluation//5
+How could you verify *?//Evaluation//5
+What information would you use to prioritize *?//Evaluation//5
+Rate the *.//Evaluation//5
+Rank the importance of *.//Evaluation//5
+Determine the value of *.//Evaluation//5
+What alternative would you suggest for *?//Synthesis//6
+What changes would you make to revise *?//Synthesis//6
+How would you explain the reason *?//Synthesis//6
+How would you generate a plan to *?//Synthesis//6
+What could you invent with *?//Synthesis//6
+What facts can you gather about *?//Synthesis//6
+Predict the outcome if *.//Synthesis//6
+What would happen if *?//Synthesis//6
+How would you portray *?//Synthesis//6
+Devise a way to *.//Synthesis//6
+How would you compile the facts for *?//Synthesis//6
+How would you elaborate on the reason *?//Synthesis//6
+How would you improve *?//Synthesis//6
+                                                                                   
