@@ -1,0 +1,13 @@
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.exe
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.deps.json
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.runtimeconfig.json
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.runtimeconfig.dev.json
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.dll
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\bin\Debug\netcoreapp3.1\ConsoleStudious.pdb
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.csprojAssemblyReference.cache
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.AssemblyInfoInputs.cache
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.AssemblyInfo.cs
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.csproj.CoreCompileInputs.cache
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.dll
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.pdb
+C:\Users\aaron\Downloads\Console-Studious\Source\ConsoleStudious\obj\Debug\netcoreapp3.1\ConsoleStudious.genruntimeconfig.cache
