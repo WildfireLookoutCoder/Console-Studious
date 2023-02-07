@@ -2,15 +2,17 @@
 {
     public class Question
     {
+        public int index { get; set; }
         public string questionString { get; set; }
-        public int bloomLevel { get; set; }
-        public string subject { get; set; }
+        public Stem stem { get; set; }
+        public Term term { get; set; }
 
-        public Question(string questionString, int bloomLevel, string subject)
+        public Question(int indexValue, string questionString, Stem stemValue, Term termValue)
         {
+            this.index = indexValue;
             this.questionString = questionString;
-            this.bloomLevel = bloomLevel;
-            this.subject = subject;
+            this.stem = stemValue;
+            this.term = termValue;
         }
     }
 }

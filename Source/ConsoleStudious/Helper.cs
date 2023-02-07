@@ -9,6 +9,7 @@ namespace ConsoleStudious
         public static string Prompt(string prompt)
         {
             Console.WriteLine(prompt);
+            Helper.EmptyLines(2);
             var reply = Console.ReadLine();
             Console.Clear();
             return reply;
@@ -48,6 +49,7 @@ namespace ConsoleStudious
             int num;
             while (!int.TryParse(Prompt(prompt), out num))
                 Console.WriteLine("Try again");
+                EmptyLines(2);
             return num;
         }
     }

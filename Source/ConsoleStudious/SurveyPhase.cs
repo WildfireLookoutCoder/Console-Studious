@@ -22,8 +22,8 @@ namespace ConsoleStudious
         {
             Console.WriteLine("**Add instructions for how to do SQ3R - Survey Phase**");
             // Prompt for Terms
-            this.terms = new List<Term>();
-            bool addTerm = true;
+            terms = new List<Term>();
+            bool continueAddingTerms = true;
             int termCounter = 0;
             do
             {
@@ -33,19 +33,20 @@ namespace ConsoleStudious
                     Console.Write(term.term + ", ");
                 }
                 Helper.EmptyLines(2);
-                string input = Helper.Prompt("Add another term or type 'Finished' to move on to the Question phase:");
-                if (input.Equals("Finished"))
+                string prompt = "Add another term" + (terms.Count >= 2 ? " or just press Enter to move on to the Question phase:":":");
+                string input = Helper.Prompt(prompt);
+                if (!input.Equals(""))
                 {
-                    addTerm = false;
-                    surveyEndTime = DateTime.Now;
-                }
-                else
-                {
-                    termCounter++;
+                    termCounter++; // start term numbering at 1
                     Term newTerm = new Term(termCounter, input, subjectTitle);
                     terms.Add(newTerm);
                 }
-            } while (addTerm);
+                else if (input.Equals("") && terms.Count >= 2)
+                {
+                    continueAddingTerms = false;
+                    surveyEndTime = DateTime.Now;
+                }
+            } while (continueAddingTerms);
         }
     }
     

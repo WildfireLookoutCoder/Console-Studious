@@ -18,20 +18,6 @@ namespace ConsoleStudious
 
             ReadPhase read = new ReadPhase(question.questions);
             read.PromptForRead();
-
-            /*Helper.EmptyLines(5);
-            Console.WriteLine("Log of variables:");
-            Console.WriteLine($"sessionStart = {session.sessionStart}");
-            Console.WriteLine($"subjectTitle = {session.subjectTitle}");
-            Console.WriteLine($"goalInHours = {session.goalInHours}");
-            Console.WriteLine($"Total survey terms: {survey.terms.Count}");
-            Helper.EmptyLines(7);*/
-
-
         }
-
-        
-
-        
     }
 }

@@ -12,8 +12,7 @@ namespace ConsoleStudious
         {
             this.sessionStart = DateTime.Now;
             this.subjectTitle = Helper.Prompt($"What are we studying {Helper.Nowish()}?");
-            this.goalInHours = Double.Parse(Helper.Prompt($"And how long (in hours) are we intending to study {subjectTitle} tonight?"));
-            
+            this.goalInHours = Helper.PromptForInt($"And how many hours are we intending to study {subjectTitle} tonight?");
         }
         public SessionPhase()
         {

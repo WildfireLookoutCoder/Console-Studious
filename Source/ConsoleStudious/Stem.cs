@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace ConsoleStudious
 {
-    internal class Stem
+    public class Stem
     {
         public string stem { get; set; }
-        public string bloomTerm { get; set; }
+        public string bloomLabel { get; set; }
         public int bloomLevel { get; set; }
-        public Stem(string stemValue, string bloomTermValue, int bloomLevelValue)
+        public Stem(string stemValue, string bloomLabelValue, int bloomLevelValue)
         {
             stem = stemValue;
-            bloomTerm = bloomTermValue;
+            bloomLabel = bloomLabelValue;
             bloomLevel = bloomLevelValue;
         }
 
@@ -19,11 +19,11 @@ namespace ConsoleStudious
         {
             List<Stem> stems = new List<Stem>();
             stems.Add(new Stem("What do you remember about *?", "Knowledge", 1));
-            stems.Add(new Stem("How would you define  *?", "Knowledge", 1));
-            stems.Add(new Stem("How would you identify  *?", "Knowledge", 1));
-            stems.Add(new Stem("How would you recognize  *?", "Knowledge", 1));
-            stems.Add(new Stem("What would you choose  *?", "Knowledge", 1));
-            stems.Add(new Stem("Describe what happens when  *?", "Knowledge", 1));
+            stems.Add(new Stem("How would you define *?", "Knowledge", 1));
+            stems.Add(new Stem("How would you identify *?", "Knowledge", 1));
+            stems.Add(new Stem("How would you recognize *?", "Knowledge", 1));
+            stems.Add(new Stem("What would you choose *?", "Knowledge", 1));
+            stems.Add(new Stem("Describe what happens when *?", "Knowledge", 1));
             stems.Add(new Stem("How is (are) *?", "Knowledge", 1));
             stems.Add(new Stem("Where is (are) *?", "Knowledge", 1));
             stems.Add(new Stem("Which one *?", "Knowledge", 1));
@@ -33,10 +33,10 @@ namespace ConsoleStudious
             stems.Add(new Stem("When did *?", "Knowledge", 1));
             stems.Add(new Stem("How would you outline *?", "Knowledge", 1));
             stems.Add(new Stem("List the * in order.", "Knowledge", 1));
-            stems.Add(new Stem("How would you compare *with * *?", "Comprehension", 2));
-            stems.Add(new Stem("How would you contrast *with * *?", "Comprehension", 2));
+            stems.Add(new Stem("How would you compare * with **?", "Comprehension", 2));
+            stems.Add(new Stem("How would you contrast * with **?", "Comprehension", 2));
             stems.Add(new Stem("How would you clarify the meaning of *?", "Comprehension", 2));
-            stems.Add(new Stem("How would you differentiate between* and **?", "Comprehension", 2));
+            stems.Add(new Stem("How would you differentiate between * and **?", "Comprehension", 2));
             stems.Add(new Stem("How would you generalize *?", "Comprehension", 2));
             stems.Add(new Stem("How would you express *?", "Comprehension", 2));
             stems.Add(new Stem("What can you infer from *?", "Comprehension", 2));
@@ -58,16 +58,16 @@ namespace ConsoleStudious
             stems.Add(new Stem("How would you modify *?", "Application", 3));
             stems.Add(new Stem("How could you develop *?", "Application", 3));
             stems.Add(new Stem("Why does * work ?", "Application", 3));
-            stems.Add(new Stem("How would you alter *to * *?", "Application", 3));
+            stems.Add(new Stem("How would you alter * to **?", "Application", 3));
             stems.Add(new Stem("What examples can you find that *?", "Application", 3));
             stems.Add(new Stem("How would you solve *?", "Application", 3));
-            stems.Add(new Stem("How can you classify *according to *?", "Analysis", 4));
+            stems.Add(new Stem("How can you classify * according to _____________?", "Analysis", 4));
             stems.Add(new Stem("How can you compare the different parts *?", "Analysis", 4));
             stems.Add(new Stem("What explanation do you have for *?", "Analysis", 4));
-            stems.Add(new Stem("How is *connected to * *?", "Analysis", 4));
+            stems.Add(new Stem("How is * connected to **?", "Analysis", 4));
             stems.Add(new Stem("Discuss the pros and cons of *.", "Analysis", 4));
             stems.Add(new Stem("How can you sort the parts *?", "Analysis", 4));
-            stems.Add(new Stem("What is the , Analysis of *?", "Analysis", 4));
+            stems.Add(new Stem("What is the analysis of *?", "Analysis", 4));
             stems.Add(new Stem("What can you infer *?", "Analysis", 4));
             stems.Add(new Stem("What ideas validate *?", "Analysis", 4));
             stems.Add(new Stem("How would you explain *?", "Analysis", 4));
