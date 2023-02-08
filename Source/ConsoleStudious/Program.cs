@@ -16,8 +16,8 @@ namespace ConsoleStudious
             QuestionPhase question = new QuestionPhase(survey.terms);
             question.PromptForQuestion();
 
-            ReadPhase read = new ReadPhase(question.questions);
-            read.PromptForRead();
+            /*ReadPhase read = new ReadPhase(question.questions);
+            read.PromptForRead();*/
         }
     }
 }

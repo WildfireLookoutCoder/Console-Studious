@@ -15,6 +15,7 @@ namespace ConsoleStudious
             subject = subjectValue;
             label = labelValue;
         }
+        
     }
     
 }

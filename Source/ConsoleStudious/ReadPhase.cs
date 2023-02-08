@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleStudious
 {
@@ -9,9 +10,18 @@ namespace ConsoleStudious
         public ReadPhase(List<Question> questionsValue)
         {
             questions = questionsValue;
-
         }
         public void PromptForRead()
+        {
+            bool answerAnotherQuestion = true;
+            ProvideInstructions();
+            do
+            {
+
+            } while (answerAnotherQuestion);
+        }
+
+        private void ProvideInstructions()
         {
             
         }

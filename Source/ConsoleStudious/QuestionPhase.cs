@@ -10,14 +10,12 @@ namespace ConsoleStudious
         private List<Stem> stems { get; set; }
         private List<Question> uneditedQuestions { get; set; }
         public List<Question> questions { get; set; }
-        
+
         public QuestionPhase(List<Term> termsValue)
         {
             terms = termsValue;
             stems = Stem.GenerateBloomStems();
             uneditedQuestions = GenerateUneditedQuestions();
-
-            
         }
 
         private List<Question> GenerateUneditedQuestions()
@@ -29,7 +27,7 @@ namespace ConsoleStudious
 
             foreach (Term term in terms)
             {
-                foreach(Stem stem in stems)
+                foreach (Stem stem in stems)
                 {
                     string questionString;
 
@@ -41,9 +39,9 @@ namespace ConsoleStudious
                     questionString = stem.stem.Replace("**", terms[randomIndex].term);
                     questionString = questionString.Replace("*", term.term);
                     questionCounter++; // start counting at 1
-                    
+
                     Question newQuestion = new Question(questionCounter, questionString, stem, term);
-                    
+
                     uneditedQuestions.Add(newQuestion);
                 }
             }
@@ -52,19 +50,50 @@ namespace ConsoleStudious
 
         public List<Question> PromptForQuestion()
         {
-            bool continueSelectingQuestions = true;
+            string input;
             List<Question> editedQuestions = new List<Question>();
+
+            ProvideInstructions();
+
+            do
+            {
+                Question selectedQuestion = Helper.SelectQuestionByTermByBloom(uneditedQuestions);
+                selectedQuestion = EditQuestion(selectedQuestion);
+                editedQuestions.Add(selectedQuestion);
+                Console.WriteLine($"You have added {editedQuestions.Count} questions to your session so far.");
+                Helper.EmptyLines(2);
+                input = Helper.Prompt("Hit Enter to add another question to your session or type \"Finished\" to move on to the Reading Phase");           
+
+            } while (!input.Equals("Finished"));
+
+            ClosingMessage(editedQuestions);
+
+            return editedQuestions;
+        }
+
+        private static void ClosingMessage(List<Question> editedQuestions)
+        {
+            Console.Clear();
+            Console.WriteLine($"You have {editedQuestions.Count} questions in your study session:");
+            foreach (Question question in editedQuestions)
+            {
+                Console.WriteLine($"{question.label}. {question.questionString}");
+            }
+        }
+
+        private void ProvideInstructions()
+        {
             // Display unedited questions, Prompt for Int, then pisplay Unedited Questions for that term, then Prompt for Integer
-            Console.WriteLine("**Add instructions on how to do Question phase task**");
             Console.WriteLine($"Studious has used Bloom's Taxonomy of Knowledge to generate {uneditedQuestions.Count} questions from {terms.Count} terms.");
             Helper.EmptyLines(2);
             Console.WriteLine("Press any key to see them all:");
+            Helper.EmptyLines(2);
             Console.ReadKey();
             Console.Clear();
             // display unedited questions
             foreach (Question question in uneditedQuestions)
             {
-                Console.WriteLine($"{question.index}. {question.questionString} ({question.stem.bloomLevel} - {question.stem.bloomLabel})");
+                Console.WriteLine($"{question.label}. {question.questionString} ({question.stem.bloomLevel} - {question.stem.bloomLabel})");
             };
             Helper.EmptyLines(2);
             Console.WriteLine(@"This is a large number of questions to deal with all at once.
@@ -73,86 +102,31 @@ Then we will also group these questions based on their complexity according to B
 Answering more complex questions will help you gain a deeper level of understanding for each term.
 
 You must select which questions you would like to study this session.
-When you select a question you will have the opportunity to edit its text before you add it to your session.
+When you select a question you will have the opportunity to edit its text before you add it to your session.");
+            Helper.EmptyLines(2);
+            Helper.AnyKeyToContinue();
+        }
+        private Question EditQuestion(Question question)
+        {
+            string input; 
+            Console.WriteLine("Edit the following:");
+            Helper.EmptyLines(2);
+            Console.WriteLine(question.questionString);
+            Helper.EmptyLines(2);
+            Console.WriteLine("Enter your edited version below or just press Enter to use the question as it is written.");
+            Helper.EmptyLines(2);
 
-Press any key to see your questions listed by study term.");
-            Console.ReadKey();
-            Console.Clear();
-            do
+            input = Console.ReadLine();
+            if (input.Length != 0)
             {
-                Question selectedQuestion = SelectQuestion();
-                editedQuestions.Add(selectedQuestion);
-                Console.WriteLine($"You have selected {editedQuestions.Count} questions.");
-                Helper.EmptyLines(2);
-                Console.WriteLine("Hit Enter to add another question to your session or type \"Finished\" to move on to the Reading Phase");
-                if (Console.ReadLine().Equals("Finished"))
-                {
-                    continueSelectingQuestions = false;
-                }
-            } while (continueSelectingQuestions);
-
-            Console.Clear();
-            Console.WriteLine($"You have {editedQuestions.Count} questions in your study session:");
-            foreach(Question question in editedQuestions)
-            {
-                Console.WriteLine($"{question.index}. {question.questionString}");
+                question.questionString = input;
             }
 
-            return editedQuestions;
+            Console.WriteLine($"Your finished question: {question.questionString}");
+            Helper.EmptyLines(2);
+            Helper.AnyKeyToContinue();
+
+            return question;
         }
-
-        private Question SelectQuestion()
-        {
-            Question selectedQuestion = null;
-            do
-            {
-                foreach (Term term in terms)
-                {
-                    for (int i = 1; i < 7; i++)// Hardcoded this, but really it should be a list of Bloom somethings that stops iteration
-                    {
-                        Console.WriteLine($"Term: {term.term}");
-                        Console.WriteLine($"Bloom Level: {uneditedQuestions.FirstOrDefault(q => q.stem.bloomLevel == i).stem.bloomLevel} - \"{uneditedQuestions.FirstOrDefault(q => q.stem.bloomLevel == i).stem.bloomLabel}\"");
-                        Helper.EmptyLines(2);
-                        foreach (Question question in uneditedQuestions.Where(q => q.stem.bloomLevel == i && q.term.term == term.term))
-                        {
-                            Console.WriteLine($"{question.index}. {question.questionString}");
-                        }
-                        Helper.EmptyLines(2);
-                        Console.WriteLine("Enter the index number of a question you would like to add to your session, or type nothing and press Enter to see the next set of questions:");
-                        string reply = Console.ReadLine();
-                        int selectedIndex;
-                        bool success = int.TryParse(reply, out selectedIndex);
-                        if (success)
-                        {
-                            Console.Clear();
-                            selectedQuestion = uneditedQuestions.FirstOrDefault(q => q.index == selectedIndex);
-                            Console.WriteLine($"Selected: {selectedQuestion.questionString}");
-                            Console.WriteLine(@"
-Enter your edited version below or just press Enter to use the question as it is written.
-
-
-
-");
-                            reply = Console.ReadLine();
-                            if(reply.Length != 0)
-                            {
-                                selectedQuestion.questionString = reply;// This doesn't belong here at all. Method is SELECT question
-                            }
-                            Console.WriteLine($"Selected: {selectedQuestion.questionString}");
-                            Helper.EmptyLines(2);
-                            return selectedQuestion;
-                        }
-                        Console.Clear();
-                    }
-                    Console.Clear();
-                }
-            } while (selectedQuestion == null);
-
-            Console.WriteLine($"Selected: {selectedQuestion.questionString}");
-            
-            return selectedQuestion;
-        }
-
-        
     }
 }
