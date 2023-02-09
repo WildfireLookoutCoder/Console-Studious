@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleStudious
 {
     public class SessionPhase
     {
+        
+
         public DateTime sessionStart { get; set; }
         public string subjectTitle { get; set; }
         public double goalInHours { get; set; }
+        internal List<Question> questions;
         public SessionPhase()
         {
 

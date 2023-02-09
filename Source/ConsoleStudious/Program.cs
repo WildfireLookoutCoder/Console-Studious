@@ -14,10 +14,10 @@ namespace ConsoleStudious
             survey.PromptForSurvey();
 
             QuestionPhase question = new QuestionPhase(survey.terms);
-            question.PromptForQuestion();
+            session.questions = question.PromptForQuestion();
 
-            /*ReadPhase read = new ReadPhase(question.questions);
-            read.PromptForRead();*/
+            ReadPhase read = new ReadPhase(question.questions);
+            session.questions = read.PromptForRead();
         }
     }
 }

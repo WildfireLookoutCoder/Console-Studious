@@ -91,19 +91,22 @@ namespace ConsoleStudious
                 Console.Clear();
             } while (selectedTerm == null);
 
-            Console.WriteLine($"You have selected {selectedTerm.label}. {selectedTerm.term}");
+            /*Console.WriteLine($"You have selected {selectedTerm.label}. {selectedTerm.term}");
             EmptyLines(2);
-            AnyKeyToContinue();
+            AnyKeyToContinue();*/
 
             return selectedTerm;
         }
         internal static void DisplayQuestions(List<Question> questions)
         {
-            foreach (Question question in questions)
+            if (questions.Count > 0)
             {
-                Console.WriteLine($"{question.label}.  {question.questionString}");
+                foreach (Question question in questions)
+                {
+                    Console.WriteLine($"{question.label}.  {question.questionString}");
+                }
+                EmptyLines(2);
             }
-            EmptyLines(2);
         }
         internal static Question SelectQuestionByTermByBloom(List<Question> questions)
         {
