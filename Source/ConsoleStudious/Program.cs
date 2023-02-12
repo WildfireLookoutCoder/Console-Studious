@@ -7,6 +7,7 @@ namespace ConsoleStudious
     {
         static void Main(string[] args)
         {
+            Helper.Setup();
             SessionPhase session = new SessionPhase();
             session.PromptForSessionInfo();
 

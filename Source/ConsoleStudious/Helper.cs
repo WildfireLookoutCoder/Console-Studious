@@ -15,6 +15,40 @@ namespace ConsoleStudious
             Console.Clear();
             return reply;
         }
+
+        internal static void Setup()
+        {
+            /*
+
+            \' - single quote, needed for character literals
+            \" - double quote, needed for string literals
+            \\ - backslash
+            \0 - Unicode character 0
+            \a - Alert (character 7)
+            \b - Backspace (character 8)
+            \f - Form feed (character 12)
+            \n - New line (character 10)
+            \r - Carriage return (character 13)
+            \t - Horizontal tab (character 9)
+            \v - Vertical tab (character 11)
+
+             */
+            
+            Console.Title = "Console Studious";            
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+
+            Console.WindowWidth = 156;
+            // Wide enough for 12 columns of 13 character-columns each
+            // Col 78 is halfway point for whole screen
+            // Col ((c-1)13 + 7) is center of column indicated by c
+            Console.WindowHeight = 63;
+            // Rule of Thirds = 20 characters per row
+
+            Console.TreatControlCAsInput = false; // THis allows pating content from clipboard
+        }
+
         internal static int PromptForInt(string prompt)
         {
             int num;
