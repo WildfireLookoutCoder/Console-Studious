@@ -6,6 +6,8 @@ namespace ConsoleStudious
 {
     class Display
     {
+        
+
         public int Width { get; set; }
         public int Center { get; }
         public int Column { get; }
@@ -21,6 +23,7 @@ namespace ConsoleStudious
         public int NavTop { get; }
         public int MainTop { get; }
         public int MainRowCount { get;  }
+        private readonly int MainBufferRows = 5;
         public int FooterTop { get; }
         
 
@@ -47,22 +50,22 @@ namespace ConsoleStudious
 
         public string SetCenterAlignedText(string content)
         {
-            string output = "";
+            StringBuilder stringBuilder = new StringBuilder();
             for (int i = Center - (content.Length / 2); i == 0; i--){
-                output += " ";
+                stringBuilder.Append(" ");
             }
-            output += content;
-            return output;
+            stringBuilder.Append(content);
+            return stringBuilder.ToString();
         }
         public string SetCenterColumnLeftAlignedText(string content)
         {
-            string output = "";
-            for (int i = CenterLeftMargin; i == 0; i--)
+            StringBuilder stringBuilder = new StringBuilder();
+            for(int i = CenterLeftMargin; i >= 0; i--)
             {
-                output += " ";
+                stringBuilder.Append(" ");
             }
-            output += content;
-            return output;
+            stringBuilder.Append(content);
+            return stringBuilder.ToString();
         }
         public string SetTwoColumnLeftAlignedText(string contentA, string contentB)
         {
@@ -81,23 +84,37 @@ namespace ConsoleStudious
         }
         public void DisplayMainScreen(string content)
         {
-            if (content.Length > MaxLineLength * MainRowCount)
+            if (content.Length > MaxLineLength * (MainRowCount-MainBufferRows))//
             {
                 // divide content in halves A and B
-                // get the first index of space char in second half of text.
+                string contentA;
+                string contentB;
+                                // get the first index of space char in second half of text.
+                contentA = content.Substring(0, content.Length / 2);
+                contentA = contentA.Substring(0, contentA.LastIndexOf(" "));
+                List<string> rowsA = ParseOneColumn(contentA);
+
                 // grab the substring from the second half and add it to the first half, so the first half is longer than the second
-                // Parse A into a list of strings representing rows of text - try to use ParseOneColumn
-                // Parse B into a list of strings representing rows of text - try to use ParseOneColumn
+                contentB = content.Substring(contentA.Length);
+                List<string> rowsB = ParseOneColumn(contentB);
                 // TRICKY LOOP: I want to iterate for the count of whichever loop is larger.
                 //      SetTwoColumnLeftAlignedText(string contentA, string contentB) until BOTH lists are empty
             }
             else
             {
                 List<string> rows = ParseOneColumn(content);
-                foreach(string row in rows)
+                if (rows.Count <= MainRowCount)
                 {
-                    Console.WriteLine(SetCenterColumnLeftAlignedText(row));
+                    foreach (string row in rows)
+                    {
+                        Console.WriteLine(SetCenterColumnLeftAlignedText(row));
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("ERROR: Too much content");
+                }
+
             }
         }
 
@@ -108,14 +125,23 @@ namespace ConsoleStudious
             int displayedTextLength = 0;
             do
             {
-                row = content.Substring(displayedTextLength, displayedTextLength + MaxLineLength);
-                row = row.Substring(0, row.LastIndexOf(' '));
-                row = row.Trim();
+                row = displayedTextLength < content.Length ? content.Substring(displayedTextLength) : null;
+                if (!string.IsNullOrEmpty(row))
+                {
 
-                rows.Add(row);
-                displayedTextLength += row.Length;
 
-            } while (!String.IsNullOrEmpty(row));
+                    row = row.Length > MaxLineLength ? row.Substring(0, MaxLineLength) : row;
+                    row = displayedTextLength + row.Length != content.Length && !content.Substring(row.Length + displayedTextLength).StartsWith(" ") ? row.Substring(0, row.LastIndexOf(' ')) : row;
+
+                    displayedTextLength += row.Length;
+
+                    row = row.Trim();
+
+                    rows.Add(row);
+                }
+                
+
+            } while (!string.IsNullOrEmpty(row));
             return rows;
         }
     }
