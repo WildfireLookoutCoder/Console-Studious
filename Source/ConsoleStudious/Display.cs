@@ -48,9 +48,24 @@ namespace ConsoleStudious
             MainRowCount = FooterTop - MainTop;
         }
 
-        public void DisplayMainScreen(string content)
+
+        internal void DisplayHeader()
         {
-            if (content.Length > MaxLineLength * (MainRowCount - MainBufferRows))//
+            Console.WriteLine(SetHorizontalRule());
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(SetCenterAlignedText("STUDIOUS"));
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(SetHorizontalRule());
+        }
+        public void DisplayNav()
+        {
+            throw new NotImplementedException();
+        }
+        public void DisplayMain(string content)
+        {
+            if (content.Length > MaxLineLength * (MainRowCount - MainBufferRows))
             {
                 List<string> rows = ParseTwoColumns(content);
                 if (rows.Count <= MainRowCount)
@@ -82,40 +97,38 @@ namespace ConsoleStudious
 
             }
         }
+        internal void DisplayFooter()
+        {
+            throw new NotImplementedException();
+        }
 
 
         public string SetCenterAlignedText(string content)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = Center - (content.Length / 2); i == 0; i--){
-                stringBuilder.Append(" ");
-            }
+            StringBuilder stringBuilder = new StringBuilder(new string(' ', Center - (content.Length / 2)));
             stringBuilder.Append(content);
             return stringBuilder.ToString();
         }
         public string SetLeftAlignedText(string content, int margin)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < margin; i++)
-            {
-                stringBuilder.Append(" ");
-            }
+            StringBuilder stringBuilder = new StringBuilder(new string(' ', margin));
             stringBuilder.Append(content);
             return stringBuilder.ToString();
         }
         public string SetLeftAlignedText(string contentA, string contentB)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < Column; i++)
-            {
-                stringBuilder.Append(" ");
-            }
+            StringBuilder stringBuilder = new StringBuilder(new string(' ', Column));
             stringBuilder.Append(contentA);
             for (int i = stringBuilder.Length; i <= RightInnerMargin; i++)
             {
                 stringBuilder.Append(" ");
             }
             stringBuilder.Append(contentB);
+            return stringBuilder.ToString();
+        }
+        public string SetHorizontalRule()
+        {
+            StringBuilder stringBuilder = new StringBuilder(new string('-', Width));
             return stringBuilder.ToString();
         }
         
@@ -179,5 +192,7 @@ namespace ConsoleStudious
             } while (!string.IsNullOrEmpty(row));
             return rows;
         }
+
+        
     }
 }
