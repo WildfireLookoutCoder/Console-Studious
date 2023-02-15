@@ -48,57 +48,22 @@ namespace ConsoleStudious
             MainRowCount = FooterTop - MainTop;
         }
 
-        public string SetCenterAlignedText(string content)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = Center - (content.Length / 2); i == 0; i--){
-                stringBuilder.Append(" ");
-            }
-            stringBuilder.Append(content);
-            return stringBuilder.ToString();
-        }
-        public string SetCenterColumnLeftAlignedText(string content)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            for(int i = CenterLeftMargin; i >= 0; i--)
-            {
-                stringBuilder.Append(" ");
-            }
-            stringBuilder.Append(content);
-            return stringBuilder.ToString();
-        }
-        public string SetTwoColumnLeftAlignedText(string contentA, string contentB)
-        {
-            string output = "";
-            for (int i = Column; i == 0; i--)
-            {
-                output += " ";
-            }
-            output += contentA;
-            for (int i = RightInnerMargin - output.Length; i == 0; i--)
-            {
-                output += " ";
-            }
-            output += contentB;
-            return output;
-        }
         public void DisplayMainScreen(string content)
         {
-            if (content.Length > MaxLineLength * (MainRowCount-MainBufferRows))//
+            if (content.Length > MaxLineLength * (MainRowCount - MainBufferRows))//
             {
-                // divide content in halves A and B
-                string contentA;
-                string contentB;
-                                // get the first index of space char in second half of text.
-                contentA = content.Substring(0, content.Length / 2);
-                contentA = contentA.Substring(0, contentA.LastIndexOf(" "));
-                List<string> rowsA = ParseOneColumn(contentA);
-
-                // grab the substring from the second half and add it to the first half, so the first half is longer than the second
-                contentB = content.Substring(contentA.Length);
-                List<string> rowsB = ParseOneColumn(contentB);
-                // TRICKY LOOP: I want to iterate for the count of whichever loop is larger.
-                //      SetTwoColumnLeftAlignedText(string contentA, string contentB) until BOTH lists are empty
+                List<string> rows = ParseTwoColumns(content);
+                if (rows.Count <= MainRowCount)
+                {
+                    foreach (string row in rows)
+                    {
+                        Console.WriteLine(row);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("ERROR: Too much content");
+                }
             }
             else
             {
@@ -107,7 +72,7 @@ namespace ConsoleStudious
                 {
                     foreach (string row in rows)
                     {
-                        Console.WriteLine(SetCenterColumnLeftAlignedText(row));
+                        Console.WriteLine(SetLeftAlignedText(row, CenterLeftMargin));
                     }
                 }
                 else
@@ -118,6 +83,76 @@ namespace ConsoleStudious
             }
         }
 
+
+        public string SetCenterAlignedText(string content)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = Center - (content.Length / 2); i == 0; i--){
+                stringBuilder.Append(" ");
+            }
+            stringBuilder.Append(content);
+            return stringBuilder.ToString();
+        }
+        public string SetLeftAlignedText(string content, int margin)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < margin; i++)
+            {
+                stringBuilder.Append(" ");
+            }
+            stringBuilder.Append(content);
+            return stringBuilder.ToString();
+        }
+        public string SetLeftAlignedText(string contentA, string contentB)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < Column; i++)
+            {
+                stringBuilder.Append(" ");
+            }
+            stringBuilder.Append(contentA);
+            for (int i = stringBuilder.Length; i <= RightInnerMargin; i++)
+            {
+                stringBuilder.Append(" ");
+            }
+            stringBuilder.Append(contentB);
+            return stringBuilder.ToString();
+        }
+        
+
+        private List<string> ParseTwoColumns(string content)
+        {
+            // divide content in halves A and B
+            string contentA;
+            string contentB;
+            int rowMax;
+            List<string> output = new List<string>();
+            // get the first index of space char in second half of text.
+            contentA = content.Substring(0, content.Length / 2);
+            contentA = contentA.Substring(0, contentA.LastIndexOf(" "));
+            List<string> rowsA = ParseOneColumn(contentA);
+            contentB = content.Substring(contentA.Length);
+            List<string> rowsB = ParseOneColumn(contentB);
+            // TRICKY LOOP: I want to iterate for the count of whichever loop is larger.
+            //      SetTwoColumnLeftAlignedText(string contentA, string contentB) until BOTH lists are empty
+            if (rowsA.Count > rowsB.Count)
+            {
+                rowsB.Add("");
+                rowMax = rowsA.Count;
+            }
+            else
+            {
+                rowsA.Add("");
+                rowMax = rowsB.Count;
+            }
+
+            for (int i = 0; i < rowMax; i++)
+            {
+                output.Add(SetLeftAlignedText(rowsA[i], rowsB[i]));
+            }
+
+            return output;
+        }
         private List<string> ParseOneColumn(string content)
         {
             List<string> rows = new List<string>();
