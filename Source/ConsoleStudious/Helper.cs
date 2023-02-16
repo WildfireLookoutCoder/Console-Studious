@@ -36,8 +36,8 @@ namespace ConsoleStudious
             
             Console.Title = "Console Studious";            
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.BackgroundColor = ConsoleColor.Yellow;
 
             Console.WindowWidth = 156;
             // Wide enough for 12 columns of 13 character-columns each

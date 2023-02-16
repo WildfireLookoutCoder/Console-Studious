@@ -59,12 +59,41 @@ namespace ConsoleStudious
             Console.WriteLine();
             Console.WriteLine(SetHorizontalRule());
         }
-        public void DisplayNav()
+        
+
+        internal void DisplayNavigation(List<Command> commands)
         {
-            throw new NotImplementedException();
+            // This method abandons the StringBuilder because we will want to switch Console properties mid-line.
+            // We can access the length of the written line via Console.Out.ToString().Length, but I had trouble finding the formula to snap 
+            Console.WriteLine();
+            Console.Write(new string(' ', Column)); // We want the whole navbar on one line of text.
+            foreach (Command command in commands)
+            {
+                if (command.Selected)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }                
+                Console.Write(command.Title);
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write(new string(' ', Column));
+            }
+            Console.WriteLine(); // ends the current line
+            Console.WriteLine(); // one line of empty space
+            Console.WriteLine(SetHorizontalRule());
+        }
+
+        internal void DisplaySystemStatus()
+        {
+            Console.WriteLine();
+            Console.WriteLine(SetCenterAlignedText("System Status: Coming Soon..."));
+            Console.WriteLine();
+            Console.WriteLine(SetHorizontalRule());
         }
         public void DisplayMain(string content)
         {
+            Console.WriteLine();
             if (content.Length > MaxLineLength * (MainRowCount - MainBufferRows))
             {
                 List<string> rows = ParseTwoColumns(content);
@@ -96,10 +125,23 @@ namespace ConsoleStudious
                 }
 
             }
+            Console.WriteLine();
+            Console.WriteLine(SetHorizontalRule());
         }
         internal void DisplayFooter()
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            Console.WriteLine(SetLeftAlignedText("Prompt goes here...:", LeftOuterMargin));
+            Helper.EmptyLines(5);
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(SetLeftAlignedText("Error message goes here....", LeftOuterMargin));
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(SetHorizontalRule());
+            Console.WriteLine();
+            Console.SetCursorPosition(Column, Console.CursorTop - 6);
+            Console.ReadLine();
         }
 
 
