@@ -4,16 +4,13 @@ using System.Text;
 
 namespace ConsoleStudious
 {
-    class SurveyPhase
+    class SurveyController : Controller
     {
         public List<Term> terms { get; set; }
-
-        public DateTime surveyStartTime { get; set; }
-        public DateTime surveyEndTime { get; set; }
         public string subjectTitle{ get; set; }
-        public SurveyPhase(string subjectTitleValue)
+        public SurveyController(string subjectTitleValue)
         {
-            surveyStartTime = DateTime.Now;
+            StartTime = DateTime.Now;
             subjectTitle = subjectTitleValue;
         }
         public void PromptForSurvey()
@@ -44,7 +41,6 @@ namespace ConsoleStudious
                 else if (input.Equals("") && terms.Count >= 2)
                 {
                     continueAddingTerms = false;
-                    surveyEndTime = DateTime.Now;
                 }
             } while (continueAddingTerms);
 

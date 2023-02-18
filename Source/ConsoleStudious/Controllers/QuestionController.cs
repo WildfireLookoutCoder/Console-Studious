@@ -4,18 +4,19 @@ using System.Linq;
 
 namespace ConsoleStudious
 {
-    internal class QuestionPhase
+    internal class QuestionController : Controller
     {
         private List<Term> terms { get; set; }
         private List<Stem> stems { get; set; }
         private List<Question> uneditedQuestions { get; set; }
         public List<Question> questions { get; set; }
 
-        public QuestionPhase(List<Term> termsValue)
+        public QuestionController(List<Term> termsValue)
         {
             terms = termsValue;
             stems = Stem.GenerateBloomStems();
             uneditedQuestions = GenerateUneditedQuestions();
+            StartTime = DateTime.Now;
         }
 
         public List<Question> PromptForQuestion()

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace ConsoleStudious
 {
-    public class ReadPhase
+    class ReadController : Controller
     {
         private List<Question> questions { get; set; }
 
-        public ReadPhase(List<Question> questionsValue)
+        public ReadController(List<Question> questionsValue)
         {
             questions = questionsValue;
+            StartTime = DateTime.Now;
         }
         public List<Question> PromptForRead()
         {

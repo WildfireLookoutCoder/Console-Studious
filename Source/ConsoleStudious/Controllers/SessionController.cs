@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 namespace ConsoleStudious
 {
-    public class SessionPhase
+    class SessionController : Controller
     {
-        
-
-        public DateTime sessionStart { get; set; }
         public string subjectTitle { get; set; }
         public double goalInHours { get; set; }
         internal List<Question> questions;
-        public SessionPhase()
+        public SessionController()
         {
 
         }
@@ -19,7 +16,7 @@ namespace ConsoleStudious
         {
             ProvideInstructions();
 
-            sessionStart = DateTime.Now;
+            StartTime = DateTime.Now;
             subjectTitle = Helper.Prompt($"What are we studying {Helper.Nowish()}?");
             // goalInHours = Helper.PromptForInt($"And how many hours are we intending to study {subjectTitle} tonight?");
 

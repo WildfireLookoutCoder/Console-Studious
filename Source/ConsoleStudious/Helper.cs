@@ -10,43 +10,10 @@ namespace ConsoleStudious
         internal static string Prompt(string prompt)
         {
             Console.WriteLine(prompt);
-            Helper.EmptyLines(2);
+            // SetEmptyLines(2);
             var reply = Console.ReadLine();
             Console.Clear();
             return reply;
-        }
-
-        internal static void Setup()
-        {
-            /*
-
-            \' - single quote, needed for character literals
-            \" - double quote, needed for string literals
-            \\ - backslash
-            \0 - Unicode character 0
-            \a - Alert (character 7)
-            \b - Backspace (character 8)
-            \f - Form feed (character 12)
-            \n - New line (character 10)
-            \r - Carriage return (character 13)
-            \t - Horizontal tab (character 9)
-            \v - Vertical tab (character 11)
-
-             */
-            
-            Console.Title = "Console Studious";            
-
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.BackgroundColor = ConsoleColor.Yellow;
-
-            Console.WindowWidth = 156;
-            // Wide enough for 12 columns of 13 character-columns each
-            // Col 78 is halfway point for whole screen
-            // Col ((c-1)13 + 7) is center of column indicated by c
-            Console.WindowHeight = 63;
-            // Rule of Thirds = 20 characters per row
-
-            Console.TreatControlCAsInput = false; // THis allows pating content from clipboard
         }
 
         internal static int PromptForInt(string prompt)
@@ -60,7 +27,7 @@ namespace ConsoleStudious
                 {
                     Console.Clear();
                     Console.WriteLine("That is not a number, try again.");
-                    EmptyLines(2);
+                    // EmptyLines(2);
                     Console.WriteLine(prompt);
                 }
             } while (!success);
@@ -70,17 +37,11 @@ namespace ConsoleStudious
         internal static void AnyKeyToContinue()
         {
             Console.WriteLine("Press any key to continue...");
-            EmptyLines(2);
+            // EmptyLines(2);
             Console.ReadKey();
             Console.Clear();
         }
-        internal static void EmptyLines(int lines)
-        {
-            for (int i = 0; i < lines; i++)
-            {
-                Console.WriteLine();
-            }
-        }
+        
         internal static string Nowish()
         {
             var nowish = "today";
@@ -109,7 +70,7 @@ namespace ConsoleStudious
             {
                 Console.Write($"{term.label}.  {term.term}, ");
             }
-            EmptyLines(2);
+            // EmptyLines(2);
         }
         internal static Term SelectTerm(List<Term> terms)
         {
@@ -139,7 +100,7 @@ namespace ConsoleStudious
                 {
                     Console.WriteLine($"{question.label}.  {question.questionString}");
                 }
-                EmptyLines(2);
+                // EmptyLines(2);
             }
         }
         internal static Question SelectQuestionByTermByBloom(List<Question> questions)
@@ -164,7 +125,7 @@ namespace ConsoleStudious
             {
                 Console.WriteLine($"Term: {selectedTerm.term}");
                 Console.WriteLine($"Bloom Level: {questions.FirstOrDefault(q => q.stem.bloomLevel == bloomLevel).stem.bloomLevel} - \"{questions.FirstOrDefault(q => q.stem.bloomLevel == bloomLevel).stem.bloomLabel}\"");
-                EmptyLines(2);
+                // EmptyLines(2);
 
                 DisplayQuestions(questions.Where(q => q.stem.bloomLevel == bloomLevel && q.term == selectedTerm).ToList());
 
@@ -186,7 +147,7 @@ namespace ConsoleStudious
             } while (selectedQuestion == null);
 
             Console.WriteLine($"You have selected {selectedQuestion.label}. {selectedQuestion.questionString}");
-            EmptyLines(2);
+            // EmptyLines(2);
             AnyKeyToContinue();
 
             return selectedQuestion;

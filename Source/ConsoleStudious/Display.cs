@@ -6,9 +6,28 @@ namespace ConsoleStudious
 {
     class Display
     {
-        
+
+        // ToDo: At the end of the project go through these properties and clean out any that are unused.
+        // ToDo: Make sure display methods can handle content with new line characters
+
+        /*
+
+            \' - single quote, needed for character literals
+            \" - double quote, needed for string literals
+            \\ - backslash
+            \0 - Unicode character 0
+            \a - Alert (character 7)
+            \b - Backspace (character 8)
+            \f - Form feed (character 12)
+            \n - New line (character 10)
+            \r - Carriage return (character 13)
+            \t - Horizontal tab (character 9)
+            \v - Vertical tab (character 11)
+
+        */
 
         public int Width { get; set; }
+        public int Height { get; set; }
         public int Center { get; }
         public int Column { get; }
         public int MaxLineLength { get; }
@@ -17,19 +36,19 @@ namespace ConsoleStudious
         public int CenterLeftMargin { get; }
         public int CenterRightMargin { get; }
         public int RightInnerMargin { get; }
-        public int RightOuterMargin { get; }
-
-        public int Height { get; set; }
+        public int RightOuterMargin { get; }        
         public int NavTop { get; }
         public int MainTop { get; }
         public int MainRowCount { get;  }
-        private readonly int MainBufferRows = 5;
+        public int MainBufferRows = 5;
         public int FooterTop { get; }
         
 
         public Display(int width, int height)
         {
             Width = width;
+            Height = height;
+
             Center = width / 2;
             Column = width / 12;
             MaxLineLength = Column * 4;
@@ -39,16 +58,27 @@ namespace ConsoleStudious
             CenterRightMargin = Center + (2 * Column);
             RightInnerMargin = Center + Column;
             RightOuterMargin = width - Column;
-
-
-            Height = height;
             NavTop = 7;
             MainTop = 14;
             FooterTop = height - 7;
             MainRowCount = FooterTop - MainTop;
+
+            Console.Title = "Console Studious";
+            Console.WindowWidth = width;
+            Console.WindowHeight = height;
+            SetTextColourNormal();
         }
 
-
+        public string Screen(List<Command> commands, string content, string prompt, string error)
+        {
+            Console.Clear();
+            SetTextColourNormal();
+            DisplayHeader();
+            DisplayNavigation(commands);
+            DisplaySystemStatus();
+            DisplayMain(content);
+            return DisplayFooter(prompt, error);
+        }
         internal void DisplayHeader()
         {
             Console.WriteLine(SetHorizontalRule());
@@ -59,8 +89,6 @@ namespace ConsoleStudious
             Console.WriteLine();
             Console.WriteLine(SetHorizontalRule());
         }
-        
-
         internal void DisplayNavigation(List<Command> commands)
         {
             // This method abandons the StringBuilder because we will want to switch Console properties mid-line.
@@ -83,7 +111,6 @@ namespace ConsoleStudious
             Console.WriteLine(); // one line of empty space
             Console.WriteLine(SetHorizontalRule());
         }
-
         internal void DisplaySystemStatus()
         {
             Console.WriteLine();
@@ -91,7 +118,7 @@ namespace ConsoleStudious
             Console.WriteLine();
             Console.WriteLine(SetHorizontalRule());
         }
-        public void DisplayMain(string content)
+        internal void DisplayMain(string content)
         {
             Console.WriteLine();
             if (content.Length > MaxLineLength * (MainRowCount - MainBufferRows))
@@ -128,36 +155,44 @@ namespace ConsoleStudious
             Console.WriteLine();
             Console.WriteLine(SetHorizontalRule());
         }
-        internal void DisplayFooter()
+        internal string DisplayFooter(string prompt, string error)
         {
             Console.WriteLine();
-            Console.WriteLine(SetLeftAlignedText("Prompt goes here...:", LeftOuterMargin));
-            Helper.EmptyLines(5);
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(SetLeftAlignedText("Error message goes here....", LeftOuterMargin));
-            Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(SetLeftAlignedText(prompt, LeftOuterMargin));
+            SetEmptyLines(5);
+            Console.Write(new string(' ', Column));
+            SetTextColourHighlighted();
+            Console.WriteLine(!string.IsNullOrEmpty(error) ? error : "");
+            SetTextColourNormal();
             Console.WriteLine(SetHorizontalRule());
             Console.WriteLine();
             Console.SetCursorPosition(Column, Console.CursorTop - 6);
-            Console.ReadLine();
+            return Console.ReadLine();
         }
 
-
-        public string SetCenterAlignedText(string content)
+        private void SetTextColourNormal()
+        {
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+        }
+        private void SetTextColourHighlighted()
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+        }
+        private string SetCenterAlignedText(string content)
         {
             StringBuilder stringBuilder = new StringBuilder(new string(' ', Center - (content.Length / 2)));
             stringBuilder.Append(content);
             return stringBuilder.ToString();
         }
-        public string SetLeftAlignedText(string content, int margin)
+        private string SetLeftAlignedText(string content, int margin)
         {
             StringBuilder stringBuilder = new StringBuilder(new string(' ', margin));
             stringBuilder.Append(content);
             return stringBuilder.ToString();
         }
-        public string SetLeftAlignedText(string contentA, string contentB)
+        private string SetLeftAlignedText(string contentA, string contentB)
         {
             StringBuilder stringBuilder = new StringBuilder(new string(' ', Column));
             stringBuilder.Append(contentA);
@@ -168,12 +203,19 @@ namespace ConsoleStudious
             stringBuilder.Append(contentB);
             return stringBuilder.ToString();
         }
-        public string SetHorizontalRule()
+        private string SetHorizontalRule()
         {
             StringBuilder stringBuilder = new StringBuilder(new string('-', Width));
             return stringBuilder.ToString();
         }
-        
+        private void SetEmptyLines(int lines)
+        {
+            for (int i = 0; i < lines; i++)
+            {
+                Console.WriteLine();
+            }
+        }
+
 
         private List<string> ParseTwoColumns(string content)
         {
