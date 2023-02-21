@@ -5,13 +5,31 @@ namespace ConsoleStudious
 {
     class SessionController : Controller
     {
-        public string subjectTitle { get; set; }
-        public double goalInHours { get; set; }
-        internal List<Question> questions;
-        public SessionController()
+        public string SubjectTitle { get; set; }
+        public double GoalInHours { get; set; }
+        public List<Question> Questions { get; set; }
+        public Display Display { get; set; }
+        public SessionController(Display display)
         {
-
+            Display = display;
+            Questions = new List<Question>();
+            Commands.Add(new Command("Session", true));
+            
+            /*commands.Add(new Command("Survey", false));
+            commands.Add(new Command("Question", true));
+            commands.Add(new Command("Read", false));
+            commands.Add(new Command("Recite", false));
+            commands.Add(new Command("Review", false));*/
         }
+
+        public void PromptForReadingMaterials()
+        {
+            do
+            {
+                Input = Display.Screen(Commands, Content, Prompt, Error);
+            } while (string.IsNullOrEmpty(Input));
+        }
+
         public void PromptForSessionInfo()
         {
             ProvideInstructions();
